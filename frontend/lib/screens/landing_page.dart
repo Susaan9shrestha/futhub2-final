@@ -34,7 +34,7 @@ class LandingPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 64,
                     fontWeight: FontWeight.bold,
-                    color: Colors.red,
+                    color: Colors.orange,
                     letterSpacing: 2,
                   ),
                 ),
@@ -61,7 +61,7 @@ class LandingPage extends StatelessWidget {
                       Navigator.pushNamed(context, '/register'); // Ensure this route exists
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.orange,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

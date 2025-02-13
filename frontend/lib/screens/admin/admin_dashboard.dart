@@ -75,7 +75,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AdminProfilePage()),
+                MaterialPageRoute(
+                    builder: (context) => const AdminProfilePage()),
               );
             },
             child: const Padding(
@@ -185,7 +186,8 @@ class AdminSideMenu extends StatelessWidget {
   final Function(Widget) onPageSelected;
   final VoidCallback onLogout;
 
-  const AdminSideMenu({super.key, required this.onPageSelected, required this.onLogout});
+  const AdminSideMenu(
+      {super.key, required this.onPageSelected, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +206,8 @@ class AdminSideMenu extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.person, color: Colors.orange),
-            title: const Text('Owners', style: TextStyle(color: Colors.white)),
+            title: const Text('View Owners',
+                style: TextStyle(color: Colors.white)),
             onTap: () {
               // Navigate to OwnersListPage using the provided snippet:
               Navigator.push(
@@ -217,7 +220,8 @@ class AdminSideMenu extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.people, color: Colors.orange),
-            title: const Text('Players', style: TextStyle(color: Colors.white)),
+            title: const Text('View Players',
+                style: TextStyle(color: Colors.white)),
             onTap: () {
               // Navigate to PlayersListPage
               Navigator.push(
@@ -253,7 +257,8 @@ class OwnersListPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF121212),
       appBar: AppBar(
-        title: const Text('Owners', style: TextStyle(color: Colors.orange)),
+        title:
+            const Text('Owners List', style: TextStyle(color: Colors.orange)),
         backgroundColor: const Color(0xFF1E1E1E),
         iconTheme: const IconThemeData(color: Colors.orange),
       ),
@@ -408,41 +413,102 @@ class PlayersListPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF121212),
       appBar: AppBar(
-        title: const Text('Players', style: TextStyle(color: Colors.orange)),
+        title:
+            const Text('Players List', style: TextStyle(color: Colors.orange)),
         backgroundColor: const Color(0xFF1E1E1E),
+        iconTheme: const IconThemeData(color: Colors.orange),
       ),
       body: FutureBuilder<List<User>>(
         future: apiService
             .fetchPlayers(), // Uses the fetchPlayers() from ApiService
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.orange),
+            );
           } else if (snapshot.hasError) {
             return Center(
-                child: Text('Error: ${snapshot.error}',
-                    style: const TextStyle(color: Colors.red)));
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, color: Colors.red, size: 60),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Error: ${snapshot.error}',
+                    style: const TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Refresh the page
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PlayersListPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                    ),
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            );
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(
-                child: Text('No Players Found',
-                    style: TextStyle(color: Colors.white)));
-          } else {
-            final players = snapshot.data!;
-            return ListView.builder(
-              itemCount: players.length,
-              itemBuilder: (context, index) {
-                final player = players[index];
-                return ListTile(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.person_off, color: Colors.orange, size: 60),
+                  SizedBox(height: 16),
+                  Text(
+                    'No Players Found',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ],
+              ),
+            );
+          }
+          final players = snapshot.data!;
+          return ListView.builder(
+            itemCount: players.length,
+            itemBuilder: (context, index) {
+              final player = players[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                color: const Color(0xFF1E1E1E),
+                child: ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      player.profilePicture ??
-                          'https://example.com/default-profile.png',
+                    backgroundColor: Colors.orange,
+                    backgroundImage: player.profilePicture != null
+                        ? NetworkImage(player.profilePicture!)
+                        : null,
+                    child: player.profilePicture == null
+                        ? const Icon(Icons.person, color: Colors.white)
+                        : null,
+                  ),
+                  title: Text(
+                    player.name,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  title: Text(player.name,
-                      style: const TextStyle(color: Colors.white)),
-                  subtitle: Text(player.email,
-                      style: const TextStyle(color: Colors.white70)),
-                  // Optionally, navigate to a detailed view if needed.
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        player.email,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                      Text(
+                        player.phoneNumber,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                    ],
+                  ),
                   onTap: () {
                     // Show owner details in a modal bottom sheet
                     showModalBottomSheet(
@@ -476,10 +542,10 @@ class PlayersListPage extends StatelessWidget {
                       ),
                     );
                   },
-                );
-              },
-            );
-          }
+                ),
+              );
+            },
+          );
         },
       ),
     );
