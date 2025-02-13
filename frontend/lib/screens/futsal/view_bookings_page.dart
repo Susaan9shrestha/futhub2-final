@@ -5,14 +5,14 @@ import 'package:http/http.dart' as http;
 
 import '../../services/auth_service.dart';
 
-class BookOwnFutsalPage extends StatefulWidget {
-  const BookOwnFutsalPage({super.key});
+class ViewBookingsPage extends StatefulWidget {
+  const ViewBookingsPage({super.key});
 
   @override
   _BookOwnFutsalPageState createState() => _BookOwnFutsalPageState();
 }
 
-class _BookOwnFutsalPageState extends State<BookOwnFutsalPage> {
+class _BookOwnFutsalPageState extends State<ViewBookingsPage> {
   bool isLoading = true;
   List<dynamic> bookings = [];
 
@@ -71,8 +71,8 @@ class _BookOwnFutsalPageState extends State<BookOwnFutsalPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book Own Futsal',
-            style: TextStyle(color: Colors.white)),
+        title:
+            const Text('View Bookings', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -94,7 +94,7 @@ class _BookOwnFutsalPageState extends State<BookOwnFutsalPage> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
-                      headingRowColor: MaterialStateColor.resolveWith(
+                      headingRowColor: WidgetStateColor.resolveWith(
                           (states) => Colors.orange),
                       columns: const [
                         DataColumn(
@@ -128,7 +128,8 @@ class _BookOwnFutsalPageState extends State<BookOwnFutsalPage> {
                             DataCell(Text(booking['_id']?.toString() ?? 'N/A',
                                 style: const TextStyle(color: Colors.white))),
                             DataCell(Text(
-                                booking['futsalId']?['name']?.toString() ?? 'N/A',
+                                booking['futsalId']?['name']?.toString() ??
+                                    'N/A',
                                 style: const TextStyle(color: Colors.white))),
                             DataCell(Text(
                                 booking['user']?['name']?.toString() ?? 'N/A',

@@ -225,7 +225,7 @@ class SideMenu extends StatelessWidget {
   final Function(Widget) onPageSelected;
   final VoidCallback onLogout;
 
-  const SideMenu({required this.onPageSelected, required this.onLogout});
+  const SideMenu({super.key, required this.onPageSelected, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -378,10 +378,10 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
+                        headingRowColor: WidgetStateColor.resolveWith(
                           (states) => Colors.orange.shade700,
                         ),
-                        dataRowColor: MaterialStateColor.resolveWith(
+                        dataRowColor: WidgetStateColor.resolveWith(
                           (states) => Colors.black,
                         ),
                         columns: const [

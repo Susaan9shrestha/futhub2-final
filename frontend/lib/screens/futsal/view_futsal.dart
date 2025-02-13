@@ -27,7 +27,7 @@ class _ViewFutsalState extends State<ViewFutsal> {
   final TextEditingController _phoneController = TextEditingController();
   TimeOfDay _openingTime = const TimeOfDay(hour: 9, minute: 0);
   TimeOfDay _closingTime = const TimeOfDay(hour: 21, minute: 0);
-  List<String> _timeSlots = [];
+  final List<String> _timeSlots = [];
 
   @override
   void initState() {

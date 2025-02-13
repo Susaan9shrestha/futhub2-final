@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:futhub2/screens/futsal/add_futsal.dart';
-import 'package:futhub2/screens/futsal/book_own_futsal_page.dart';
+import 'package:futhub2/screens/futsal/view_bookings_page.dart';
 import 'package:futhub2/screens/futsal/profile_page.dart';
 import 'package:futhub2/screens/futsal/view_futsal.dart';
 import 'package:futhub2/services/auth_service.dart';
@@ -19,7 +19,7 @@ class FutsalOwnerDashboard extends StatefulWidget {
 
 class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
   List<dynamic> futsals = [];
-  List<String> _notifications = [
+  final List<String> _notifications = [
     "New booking at 3:00 PM",
     "Payment received: \$50",
     "Futsal maintenance scheduled for Sunday",
@@ -154,7 +154,7 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
             ),
             _buildDrawerItem(context, "Add Futsal", const AddFutsalPage()),
             _buildDrawerItem(
-                context, "Book Own Futsal", const BookOwnFutsalPage()),
+                context, "View Booking", const ViewBookingsPage()),
             _buildDrawerItem(context, "View Futsal", const ViewFutsal()),
             const SizedBox(height: 40),
             ElevatedButton(

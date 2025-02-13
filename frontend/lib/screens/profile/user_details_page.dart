@@ -5,7 +5,7 @@ import '../../services/api_service.dart';
 
 class UserDetailsPage extends StatelessWidget {
   final String userId;
-  const UserDetailsPage({Key? key, required this.userId}) : super(key: key);
+  const UserDetailsPage({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,9 @@ class UserDetailsPage extends StatelessWidget {
                       style:
                           const TextStyle(fontSize: 16, color: Colors.white70)),
                   const SizedBox(height: 8),
-                  if (user.phoneNumber != null)
-                    Text('Phone: ${user.phoneNumber}',
-                        style: const TextStyle(
-                            fontSize: 16, color: Colors.white70)),
+                  Text('Phone: ${user.phoneNumber}',
+                      style: const TextStyle(
+                          fontSize: 16, color: Colors.white70)),
                 ],
               ),
             );

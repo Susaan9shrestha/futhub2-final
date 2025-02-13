@@ -185,7 +185,7 @@ class AdminSideMenu extends StatelessWidget {
   final Function(Widget) onPageSelected;
   final VoidCallback onLogout;
 
-  const AdminSideMenu({required this.onPageSelected, required this.onLogout});
+  const AdminSideMenu({super.key, required this.onPageSelected, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -244,11 +244,11 @@ class AdminSideMenu extends StatelessWidget {
 // OwnersListPage: Lists all futsal owners (users with role 'futsal_owner')
 // ---------------------------------------------------------------------
 class OwnersListPage extends StatelessWidget {
-  const OwnersListPage({Key? key}) : super(key: key);
+  const OwnersListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ApiService _apiService = ApiService();
+    final ApiService apiService = ApiService();
 
     return Scaffold(
       backgroundColor: const Color(0xFF121212),
@@ -258,7 +258,7 @@ class OwnersListPage extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.orange),
       ),
       body: FutureBuilder<List<User>>(
-        future: _apiService.fetchOwners(),
+        future: apiService.fetchOwners(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -399,11 +399,11 @@ class OwnersListPage extends StatelessWidget {
 // PlayersListPage: Lists all players (users with role 'player')
 // ---------------------------------------------------------------------
 class PlayersListPage extends StatelessWidget {
-  const PlayersListPage({Key? key}) : super(key: key);
+  const PlayersListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ApiService _apiService = ApiService();
+    final ApiService apiService = ApiService();
 
     return Scaffold(
       backgroundColor: const Color(0xFF121212),
@@ -412,7 +412,7 @@ class PlayersListPage extends StatelessWidget {
         backgroundColor: const Color(0xFF1E1E1E),
       ),
       body: FutureBuilder<List<User>>(
-        future: _apiService
+        future: apiService
             .fetchPlayers(), // Uses the fetchPlayers() from ApiService
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

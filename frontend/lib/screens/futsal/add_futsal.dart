@@ -24,15 +24,15 @@ class _AddFutsalPageState extends State<AddFutsalPage> {
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  List<String> _timeSlots = [];
+  final List<String> _timeSlots = [];
 
   TimeOfDay _openingTime = TimeOfDay(hour: 9, minute: 0);
   TimeOfDay _closingTime = TimeOfDay(hour: 21, minute: 0);
 
   File? _imageFile;
-  List<File> _imageFiles = [];
+  final List<File> _imageFiles = [];
   Uint8List? _webImage;
-  List<Uint8List> _webImages = [];
+  final List<Uint8List> _webImages = [];
 
   bool _isLoading = false;
 
@@ -186,7 +186,7 @@ class _AddFutsalPageState extends State<AddFutsalPage> {
                   const SizedBox(height: 24),
                   _isLoading
                       ? const Center(child: CircularProgressIndicator())
-                      : Container(
+                      : SizedBox(
                           width: double.infinity,
                           height: 50,
                           child: ElevatedButton(

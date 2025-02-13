@@ -5,7 +5,7 @@ import '../../services/api_service.dart';
 import '../profile/user_details_page.dart';
 
 class OwnersListPage extends StatelessWidget {
-  const OwnersListPage({Key? key}) : super(key: key);
+  const OwnersListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
