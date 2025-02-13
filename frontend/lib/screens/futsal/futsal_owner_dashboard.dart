@@ -194,16 +194,16 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
                 );
               },
             ),
-            const Divider(color: Colors.grey),
-            ListTile(
-              leading: const Icon(Icons.logout, color: Colors.red),
-              title: const Text('Logout', style: TextStyle(color: Colors.red)),
-              onTap: () async {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.clear();
-                Navigator.pushReplacementNamed(context, '/login');
-              },
-            ),
+            // const Divider(color: Colors.grey),
+            // ListTile(
+            //   leading: const Icon(Icons.logout, color: Colors.red),
+            //   title: const Text('Logout', style: TextStyle(color: Colors.red)),
+            //   onTap: () async {
+            //     final prefs = await SharedPreferences.getInstance();
+            //     await prefs.clear();
+            //     Navigator.pushReplacementNamed(context, '/login');
+            //   },
+            // ),
           ],
         ),
       ),

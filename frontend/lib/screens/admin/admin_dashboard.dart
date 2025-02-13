@@ -232,12 +232,12 @@ class AdminSideMenu extends StatelessWidget {
               );
             },
           ),
-          const Divider(color: Colors.grey),
-          ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('Logout', style: TextStyle(color: Colors.red)),
-            onTap: onLogout,
-          ),
+          // const Divider(color: Colors.grey),
+          // ListTile(
+          //   leading: const Icon(Icons.logout, color: Colors.red),
+          //   title: const Text('Logout', style: TextStyle(color: Colors.red)),
+          //   onTap: onLogout,
+          // ),
         ],
       ),
     );

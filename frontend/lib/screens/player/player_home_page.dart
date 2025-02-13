@@ -90,7 +90,8 @@ class _PlayerHomePageState extends State<PlayerHomePage> {
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const PlayerProfilePage()),
+              MaterialPageRoute(
+                  builder: (context) => const PlayerProfilePage()),
             ),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -225,7 +226,8 @@ class SideMenu extends StatelessWidget {
   final Function(Widget) onPageSelected;
   final VoidCallback onLogout;
 
-  const SideMenu({super.key, required this.onPageSelected, required this.onLogout});
+  const SideMenu(
+      {super.key, required this.onPageSelected, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -254,12 +256,12 @@ class SideMenu extends StatelessWidget {
                 style: TextStyle(color: Colors.white)),
             onTap: () => onPageSelected(BookingHistoryPage()),
           ),
-          const Divider(color: Colors.grey),
-          ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: const Text('Logout', style: TextStyle(color: Colors.red)),
-            onTap: onLogout,
-          ),
+          // const Divider(color: Colors.grey),
+          // ListTile(
+          //   leading: const Icon(Icons.logout, color: Colors.red),
+          //   title: const Text('Logout', style: TextStyle(color: Colors.red)),
+          //   onTap: onLogout,
+          // ),
         ],
       ),
     );
@@ -336,7 +338,8 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
       appBar: AppBar(
         title: const Text(
           'Booking History',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
         ),
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -387,28 +390,44 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
                         columns: const [
                           DataColumn(
                               label: Text('ID',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('Futsal Name',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('User Name',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('User Email',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('Date',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('Time Slot',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('Payment Method',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                           DataColumn(
                               label: Text('Status',
-                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold))),
                         ],
                         rows: bookings.map((booking) {
                           return DataRow(
@@ -416,13 +435,15 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
                               DataCell(Text(booking['_id']?.toString() ?? 'N/A',
                                   style: const TextStyle(color: Colors.white))),
                               DataCell(Text(
-                                  booking['futsalId']?['name']?.toString() ?? 'N/A',
+                                  booking['futsalId']?['name']?.toString() ??
+                                      'N/A',
                                   style: const TextStyle(color: Colors.white))),
                               DataCell(Text(
                                   booking['user']?['name']?.toString() ?? 'N/A',
                                   style: const TextStyle(color: Colors.white))),
                               DataCell(Text(
-                                  booking['user']?['email']?.toString() ?? 'N/A',
+                                  booking['user']?['email']?.toString() ??
+                                      'N/A',
                                   style: const TextStyle(color: Colors.white))),
                               DataCell(Text(booking['bookingDate'] ?? 'N/A',
                                   style: const TextStyle(color: Colors.white))),
@@ -441,5 +462,4 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
                 ),
     );
   }
-
 }
