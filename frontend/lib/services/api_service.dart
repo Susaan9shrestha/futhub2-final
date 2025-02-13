@@ -163,7 +163,6 @@ class ApiService {
       rethrow;
     }
   }
-  
 
   Future<List<User>> fetchPlayers() async {
     String? token = await _getToken();
@@ -317,4 +316,3 @@ class ApiService {
     }
   }
 }
-

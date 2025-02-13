@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -53,7 +52,7 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
 
       if (response.statusCode == 200) {
         var decodedResponse = jsonDecode(response.body);
-        
+
         if (decodedResponse is List) {
           setState(() {
             futsals = decodedResponse;
@@ -81,23 +80,23 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    int totalBookings = futsals.length; // Total number of booking records
-
-    // Get unique futsal IDs safely
+    int totalBookings = futsals.length;
     Set<String> uniqueFutsalIds = futsals
         .map((booking) => booking['futsalId']?['_id']?.toString() ?? "Unknown")
-        .where((id) => id != "Unknown") // Filter out unknown values
+        .where((id) => id != "Unknown")
         .toSet();
     int totalFutsals = uniqueFutsalIds.length;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Futsal Owner Dashboard",
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.black,
-        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          "Futsal Owner Dashboard",
+          style: TextStyle(
+              color: Colors.orange, fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color(0xFF1E1E1E),
+        iconTheme: const IconThemeData(color: Colors.orange),
         actions: [
-          // Notification Icon with Dropdown
           Stack(
             children: [
               IconButton(
@@ -126,49 +125,85 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
                 ),
             ],
           ),
-          IconButton(
-            icon: const Icon(Icons.person, color: Colors.white),
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const OwnerProfilePage()),
+                MaterialPageRoute(
+                    builder: (context) => const OwnerProfilePage()),
               );
             },
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Icon(Icons.person, color: Colors.white),
+              ),
+            ),
           ),
         ],
       ),
       drawer: Drawer(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xFF121212),
         child: ListView(
-          padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.black),
+              decoration: BoxDecoration(
+                color: Color(0xFF121212),
+              ),
               child: Text(
-                "Menu",
+                'FUTHUB Owner',
                 style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange),
               ),
             ),
-            _buildDrawerItem(context, "Add Futsal", const AddFutsalPage()),
-            _buildDrawerItem(
-                context, "View Booking", const ViewBookingsPage()),
-            _buildDrawerItem(context, "View Futsal", const ViewFutsal()),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () async {
+            ListTile(
+              leading: const Icon(Icons.add_business, color: Colors.orange),
+              title: const Text('Add Futsal',
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddFutsalPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_today, color: Colors.orange),
+              title: const Text('View Bookings',
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ViewBookingsPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.sports_soccer, color: Colors.orange),
+              title: const Text('View Futsal',
+                  style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ViewFutsal()),
+                );
+              },
+            ),
+            const Divider(color: Colors.grey),
+            ListTile(
+              leading: const Icon(Icons.logout, color: Colors.red),
+              title: const Text('Logout', style: TextStyle(color: Colors.red)),
+              onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
                 await prefs.clear();
                 Navigator.pushReplacementNamed(context, '/login');
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-              ),
-              child: Text('Logout'),
-            )
+            ),
           ],
         ),
       ),
@@ -210,14 +245,14 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
                     top: 60,
                     right: 10,
                     child: Material(
-                      color: Colors.black,
+                      color: const Color(0xFF121212),
                       elevation: 5,
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
                         width: 250,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.grey[900],
+                          color: const Color(0xFF1E1E1E),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Column(
@@ -241,25 +276,13 @@ class _FutsalOwnerDashboardState extends State<FutsalOwnerDashboard> {
                   ),
               ],
             ),
-      backgroundColor: Colors.black,
-    );
-  }
-
-  Widget _buildDrawerItem(BuildContext context, String title, Widget page) {
-    return ListTile(
-      title: Text(title, style: const TextStyle(color: Colors.white)),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
-      },
+      backgroundColor: const Color(0xFF121212),
     );
   }
 
   Widget _buildAnalyticsCard(String title, String value) {
     return Card(
-      color: Colors.grey[900],
+      color: const Color(0xFF1E1E1E),
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
